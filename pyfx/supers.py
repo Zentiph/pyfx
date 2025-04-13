@@ -61,9 +61,12 @@ class FXNode(ABC):
         self._opacity = opacity
 
     @abstractmethod
-    def render(self, *args, **kwargs):
+    def render(self, to):
         """Render the effect node.
         This method should be implemented by subclasses to render the effect.
+
+        :param to: Output destination for the rendered effect
+        :type to: Any
         """
 
         raise NotImplementedError("Subclasses should implement this!")

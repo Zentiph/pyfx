@@ -1,6 +1,6 @@
 # pylint: disable=all
 
-from typing import Callable, ParamSpec, Protocol, Type, TypeVar
+from typing import Callable, Dict, ParamSpec, Protocol, Tuple, Type, TypeVar, Union
 
 P = ParamSpec("P")
 T = TypeVar("T")
@@ -12,13 +12,10 @@ class Comparable(Protocol):
     def __ge__(self, other: "Comparable") -> bool: ...
 
 def enforce_type(
-    arg_name: str, type: Type, strict: bool = False
+    arg_name: str, type_or_tuple: Union[Type, Tuple[Type, ...]], strict: bool = False
 ) -> Callable[[Callable[P, T]], Callable[P, T]]: ...
 def enforce_types(
-    **type_map: dict[str, Type],
-) -> Callable[[Callable[P, T]], Callable[P, T]]: ...
-def enforce_types_strict(
-    **type_map: dict[str, Type],
+    **type_map: Dict[str, Union[Type, Tuple[Type, ...]]],
 ) -> Callable[[Callable[P, T]], Callable[P, T]]: ...
 def enforce_arg_within(
     arg_name: str, lower_bound: Comparable, upper_bound: Comparable
