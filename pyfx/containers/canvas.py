@@ -1,7 +1,5 @@
 """Canvas for rendering a scene in PyFX."""
 
-from PIL import Image, ImageDraw
-
 from ..argval import enforce_type
 from ..supers import FXNode
 
@@ -32,8 +30,6 @@ class Canvas:
         self._root = root
         self._size = size
         self._bg_color = bg_color
-        self._canvas = Image.new("RGBA", self.size, [*self.bg_color, 1])
-        self._drawer = ImageDraw.Draw(self._canvas)
 
     @property
     def root(self):
